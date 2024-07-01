@@ -45,6 +45,7 @@ class RedisClient {
             });
         });
     }
+    
 }
 
 const redisClient = new RedisClient();
