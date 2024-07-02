@@ -9,21 +9,26 @@ class DBClient {
     const port = process.env.DB_PORT || 27017;
     const database = process.env.DB_DATABASE || 'files_manager';
 
-    this.client = new MongoClient(`mongodb://${host}:${port}`, { useUnifiedTopology: true });
+    this.uri = `mongodb://${host}:${port}`;
+    this.client = new MongoClient(this.uri, { useUnifiedTopology: true });
+    this.db = null; // Initialize db as null
 
-    this.client.connect((err) => {
-      if (err) {
-        console.error('MongoDB connection error:', err);
-        this.db = null; // Set db to null on connection error
-      } else {
-        this.db = this.client.db(database);
-        console.log('MongoDB connected');
-      }
-    });
+    this.connect(); // Call connect method in constructor
+  }
+
+  async connect() {
+    try {
+      await this.client.connect();
+      this.db = this.client.db(); // Set the database instance
+      console.log('MongoDB connected');
+    } catch (error) {
+      console.error('MongoDB connection error:', error);
+      this.db = null; // Set db to null on connection error
+    }
   }
 
   isAlive() {
-    return this.client && this.client.topology.isConnected();
+    return this.client && this.client.isConnected();
   }
 
   async nbUsers() {
