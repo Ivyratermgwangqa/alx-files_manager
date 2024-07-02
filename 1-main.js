@@ -1,7 +1,7 @@
-import express from 'express';
-import dbClient from './utils/db';
-import redisClient from './utils/redis';
-import router from './routes/index'; // Assuming you have an index.js in routes directory
+const express = require('express');
+const dbClient = require('./utils/db');
+const redisClient = require('./utils/redis');
+const router = require('./routes/index'); // Assuming you have a routes directory with index.js
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -25,6 +25,10 @@ app.listen(port, () => {
     console.log(await redisClient.get('myKey'));
   }, 1000 * 10);
 
-  console.log(`Number of users: ${await dbClient.nbUsers()}`);
-  console.log(`Number of files: ${await dbClient.nbFiles()}`);
+  if (dbClient.isAlive()) {
+    console.log(`Number of users: ${await dbClient.nbUsers()}`);
+    console.log(`Number of files: ${await dbClient.nbFiles()}`);
+  } else {
+    console.log('MongoDB connection failed');
+  }
 })();
