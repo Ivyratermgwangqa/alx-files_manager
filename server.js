@@ -30,4 +30,8 @@ app.get('/status', (req, res) => {
   res.status(200).json({ "redis": true, "db": true });
 });
 
+app.get('/stats', (req, res) => {
+    res.send('Stats endpoint is working!');
+});
+
 module.exports = app;
