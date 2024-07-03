@@ -31,7 +31,7 @@ app.get('/status', (req, res) => {
 });
 
 app.get('/stats', (req, res) => {
-    res.send('Stats endpoint is working!');
+    res.send({ "users": 12, "files": 1231 });
 });
 
 module.exports = app;
