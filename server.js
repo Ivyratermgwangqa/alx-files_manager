@@ -22,9 +22,7 @@ app.put('/files/:id/unpublish', FilesController.putUnpublish);
 app.get('/files/:id/data', FilesController.getFile);
 
 // Start the server
-app.listen(port, async () => {
-    await dbClient.connect();
-    await redisClient.connect();
+app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
