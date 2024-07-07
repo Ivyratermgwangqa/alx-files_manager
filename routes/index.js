@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const dbClient = require('../utils/db');
 const UsersController = require('../controllers/UsersController');
 const FilesController = require('../controllers/FilesController');
 const AuthController = require('../controllers/AuthController');
