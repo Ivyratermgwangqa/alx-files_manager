@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const UsersController = require('../controllers/UsersController');
 const FilesController = require('../controllers/FilesController');
@@ -18,13 +19,13 @@ router.get('/files/:id/data', FilesController.getFile);
 
 // Status routes
 router.get('/status', (req, res) => {
-    res.status(200).json({ redis: true, db: true });
+  res.status(200).json({ redis: true, db: true });
 });
 
 router.get('/stats', async (req, res) => {
-    const usersCount = await dbClient.nbUsers();
-    const filesCount = await dbClient.nbFiles();
-    res.status(200).json({ users: usersCount, files: filesCount });
+  const usersCount = await dbClient.nbUsers();
+  const filesCount = await dbClient.nbFiles();
+  res.status(200).json({ users: usersCount, files: filesCount });
 });
 
 // Authentication routes

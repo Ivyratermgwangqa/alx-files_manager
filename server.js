@@ -23,15 +23,15 @@ app.get('/files/:id/data', FilesController.getFile);
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
 
 app.get('/status', (req, res) => {
-  res.status(200).json({ "redis": true, "db": true });
+  res.status(200).json({ redis: true, db: true });
 });
 
 app.get('/stats', (req, res) => {
-    res.send({ "users": 12, "files": 1231 });
+  res.send({ users: 12, files: 1231 });
 });
 
 module.exports = app;
