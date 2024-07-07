@@ -1,8 +1,9 @@
 const { ObjectId } = require('mongodb');
-const dbClient = require('../utils/db');
-const redisClient = require('../utils/redis');
 const fs = require('fs').promises;
 const mime = require('mime-types');
+const dbClient = require('../utils/db');
+const redisClient = require('../utils/redis');
+
 
 class FilesController {
     static async postUpload(req, res) {
